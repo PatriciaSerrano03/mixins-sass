@@ -1,0 +1,98 @@
+@use '../mixins/hover.scss' as *;
+@use '../mixins/pseudo.scss' as *;
+@use '../mixins/responsive.scss' as *;
+
+.box{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: orange;
+
+    @include hover{
+        background-color: steelblue;
+    }
+
+   /*  &::after{
+        @include pseudo(100px, 100px){
+            top: 200px;
+            left: 200px;
+            background-color: red;
+        }
+    } */
+
+    @include responsive(tablet){
+        width: 300px;
+        background-color: pink;
+    }
+    @include responsive(laptop){
+        width: 400px;
+        background-color: plum;
+    }
+    @include responsive(desktop){
+        width: 500px;
+        background-color: purple;
+    }
+}
+
+/*La transición la ejecuta el padre por lo tanto no se queda bloqueado en la transición*/
+.container{
+    width: 200px;
+    height: 300px;
+    @include hover{
+        .box2{
+            translate: 100px;
+            background-color: antiquewhite;    
+        }     
+    }
+
+    @include responsive(laptop){
+            width: 300px;
+            @include hover{
+                .box2{
+                    translate: 200px;  
+                }     
+            }
+    }
+    @include responsive(desktop){
+            width: 400px;
+            @include hover{
+                .box2{
+                    translate: 300px;  
+                }     
+            }
+    }
+}
+
+.box2{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: aliceblue;
+    transition: translate .3s;
+}
+
+/*Display grid*/
+
+.container2{
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(2, 200px);
+    gap: 1rem;
+}
+
+.box3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: orange;
+    color: #333;
+    font-size: 3rem;
+}
+
+.box3-1{
+    grid-column: 2/4;
+}
+
+.box3-2{
+    grid-row: 1/3;
+}
